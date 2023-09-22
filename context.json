@@ -1,0 +1,6 @@
+{
+    "@context" : {
+        "s": "http://schema.org/",
+        "ex": "http://example.com/ns#",
+    }
+}
