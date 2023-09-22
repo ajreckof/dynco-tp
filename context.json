@@ -2,5 +2,54 @@
     "@context" : {
         "s": "http://schema.org/",
         "ex": "http://example.com/ns#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "url": "@id",
+        "html_url": {
+            "@id": "s:url",
+            "@type": "xsd:anyURI"
+        },
+        "number": "s:identifier",
+        "body": {
+            "@id": "s:description",
+            "@type": "xsd:string"
+        },
+        "user": "s:creator",
+        "login": "s:accountId",
+        "assignees": "s:assignee",
+        "created_at": {
+            "@id": "s:startDate",
+            "@type": "xsd:dateTimeStamp"
+        },
+        "author_association": {
+            "@id": "ex:authorAssociation",
+            "@type": "xsd:string"
+        },
+        "closed_at": {
+            "@id": "s:endDate",
+            "@type": "xsd:date"
+        },
+        "title": "s:name",
+        "labels": "ex:label",
+        "name": {
+            "@id": "s:name",
+            "@type": "xsd:string"
+        },
+        "description": {
+            "@id": "s:description",
+            "@type": "xsd:string"
+        },
+        "repository_url": {
+            "@reverse": "ex:issue",
+            "@type": "@id"
+        },
+        "issue_url": {
+            "@reverse": "ex:comment",
+            "@type": "@id"
+        },
+        "type": "@type",
+        "User": "ex:User",
+        "state": "@type",
+        "closed": "ex:ClosedIssue",
+        "open": "ex:OpenIssue"
     }
 }
