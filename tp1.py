@@ -12,4 +12,12 @@ result =jsonld.to_rdf(raw_doc, {
     'expandContext': ctx,  # contexte à appliquer
     'format': 'application/n-quads', # format de sortie
 })
+
+a.close()
+b.close()
+
+f = open("rdf.ttl", "w")
+f.write(result)
+f.close()
+
 print (result)

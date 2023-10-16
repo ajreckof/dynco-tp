@@ -26,7 +26,7 @@
         },
         "closed_at": {
             "@id": "s:endDate",
-            "@type": "xsd:date"
+            "@type": "xsd:dateTimeStamp"
         },
         "title": "s:name",
         "labels": "ex:label",
