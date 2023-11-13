@@ -1,0 +1,598 @@
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/361> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/361"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://schema.org/identifier> "361"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://schema.org/name> "Support non-propagating protected terms" .
+<https://api.github.com/users/Fak3> <http://schema.org/accountId> "Fak3" .
+<https://api.github.com/users/Fak3> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/991641?v=4" .
+<https://api.github.com/users/Fak3> <http://schema.org/url> "https://github.com/Fak3"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/Fak3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://schema.org/creator> <https://api.github.com/users/Fak3> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/needs%20discussion> <http://schema.org/name> "needs discussion" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/needs%20discussion> <http://schema.org/color> "c5def5" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/needs%20discussion> <http://schema.org/description> "" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/needs%20discussion> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:enhancement> <http://schema.org/name> "spec:enhancement" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:enhancement> <http://schema.org/color> "c11537" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:enhancement> <http://schema.org/description> "" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:enhancement> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#OpenIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://schema.org/startDate> "2020-07-18T14:39:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#authorAssociation> "CONTRIBUTOR" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://schema.org/description> "I bumped into a practical limitation of json-ld with [Verifiable credentials data model](https://www.w3.org/TR/vc-data-model/)\r\n\r\nVC context defines few protected terms at the top level of the json object - namely _issuer_ and _credentialSubject_. According to the spec, ids of those properties must be protected, and the content that goes under them is left for the users of the spec to be changed (mostly) freely. But unfortunately json-ld 1.1 protected terms prevent users from modifying property-scoped context of protected term:\r\n\r\n```json\r\n{\r\n  \"@context\": [\r\n   {\r\n      \"@protected\": true,\r\n      \"issuer\": { \"@id\": \"https://www.w3.org/2018/credentials#issuer\", \"@type\": \"@id\" }\r\n   },\r\n   {\r\n      \"issuer\": {\r\n        \"@id\": \"https://www.w3.org/2018/credentials#issuer\", \"@type\": \"@id\",\r\n        \"@context\": { \"name\": \"http://example.org/name\" }  // This raises error - modifying protected `issuer` term is not allowed\r\n      }\r\n   }\r\n  ],\r\n  \"type\": [\"VerifiableCredential\"],\r\n  \"issuer\": {\r\n    \"name\": \"My issuer\"\r\n  }\r\n}\r\n```\r\n\r\nThis ticked is moved from https://github.com/digitalbazaar/jsonld.js/issues/404\r\n\r\n> @dlongley  wrote: this use case was something that was discussed in the JSON-LD WG, but we couldn't find a way to support it given the time constraints. I also wanted this use case supported. Something similar would have been very useful for \"credentialSubject\" as well.\r\n\r\n> The alternative here is to define a type instead -- and use a type-scoped context. Like this:\r\n> ```json\r\n> \"issuer\": {\r\n>    \"type\": \"MyIssuerType\",\r\n> }\r\n> ```\r\n\r\nThe workaround suggested by @dlongley works, but I wonder if there might be better way to handle this usecase in the next version of json-ld spec.\r\n\r\nSomething that comes to mind is to use \"@protected\" keyword inside a property-scoped context of a protected term to allow its redefinition:\r\n```\r\n   {\r\n      \"@protected\": true,\r\n      \"issuer\": { \r\n         \"@id\": \"https://www.w3.org/2018/credentials#issuer\", \"@type\": \"@id\" ,\r\n         \"@context\": { \"@protected\": false }  // Indicates that property-scoped context of this protected term can be overriden.\r\n      }\r\n   },\r\n```" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/360> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/360"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://schema.org/identifier> "360"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://schema.org/name> "Finalize dates on the errata page" .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#OpenIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://schema.org/startDate> "2020-07-08T12:26:03Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/360> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/360"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/360> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/360> <http://schema.org/description> "This should be merged when the final document is published" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/359> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/359"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/identifier> "359"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/name> "address #358" .
+<https://api.github.com/users/pchampin> <http://schema.org/accountId> "pchampin" .
+<https://api.github.com/users/pchampin> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/304612?v=4" .
+<https://api.github.com/users/pchampin> <http://schema.org/url> "https://github.com/pchampin"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/pchampin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/creator> <https://api.github.com/users/pchampin> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/startDate> "2020-07-07T07:35:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/endDate> "2020-07-07T16:18:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/359> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/359"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/359> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/359> <http://schema.org/description> "\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/pull/359.html\" title=\"Last updated on Jul 7, 2020, 3:54 PM UTC (5e6f04e)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/359/eef30cf...5e6f04e.html\" title=\"Last updated on Jul 7, 2020, 3:54 PM UTC (5e6f04e)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/358> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/358"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/identifier> "358"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/name> "Typo in syntax document" .
+<https://api.github.com/users/hsolbrig> <http://schema.org/accountId> "hsolbrig" .
+<https://api.github.com/users/hsolbrig> <http://schema.org/image> "https://avatars2.githubusercontent.com/u/415926?v=4" .
+<https://api.github.com/users/hsolbrig> <http://schema.org/url> "https://github.com/hsolbrig"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/hsolbrig> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/creator> <https://api.github.com/users/hsolbrig> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/startDate> "2020-07-07T02:04:01Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/endDate> "2020-07-07T21:27:49Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://schema.org/description> "Section 9.3 Frame objects has the line:\r\n`A frame object MAY include an entry with the key @embed with any value from @always, @list, and @never.`\r\n\r\nThis should read\r\n`A frame object MAY include an entry with the key @embed with any value from @always, @once, and @never.`  (list -> once)" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/357> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/357"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/identifier> "357"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/name> "Change JCS bibref to RFC8785, as it's now published." .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/startDate> "2020-06-30T20:59:28Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/endDate> "2020-07-01T05:34:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/357> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/357"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/357> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://schema.org/description> "Note that we discuss changing our canonicalization requirements to JCS when it becomes available, which it is now. Perhaps something to take up post-publication.\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/pull/357.html\" title=\"Last updated on Jun 30, 2020, 10:25 PM UTC (d1e4f98)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/357/f22165c...d1e4f98.html\" title=\"Last updated on Jun 30, 2020, 10:25 PM UTC (d1e4f98)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/356> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/356"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/identifier> "356"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/name> "Bump rack from 2.2.2 to 2.2.3" .
+<https://api.github.com/users/dependabot%5Bbot%5D> <http://schema.org/accountId> "dependabot[bot]" .
+<https://api.github.com/users/dependabot%5Bbot%5D> <http://schema.org/image> "https://avatars0.githubusercontent.com/in/29110?v=4" .
+<https://api.github.com/users/dependabot%5Bbot%5D> <http://schema.org/url> "https://github.com/apps/dependabot"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dependabot%5Bbot%5D> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#Bot> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/creator> <https://api.github.com/users/dependabot%5Bbot%5D> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/hr:device%20independence> <http://schema.org/name> "hr:device independence" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/hr:device%20independence> <http://schema.org/color> "d88124" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/hr:device%20independence> <http://schema.org/description> "" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/hr:device%20independence> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/startDate> "2020-06-24T18:11:21Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/endDate> "2020-06-24T23:51:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://example.com/ns#authorAssociation> "CONTRIBUTOR" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/356> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/356"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/356> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://schema.org/description> "Bumps [rack](https://github.com/rack/rack) from 2.2.2 to 2.2.3.\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a href=\"https://github.com/rack/rack/blob/master/CHANGELOG.md\">rack's changelog</a>.</em></p>\n<blockquote>\n<h1>Changelog</h1>\n<p>All notable changes to this project will be documented in this file. For info on how to format all future additions to this file please reference <a href=\"https://keepachangelog.com/en/1.0.0/\">Keep A Changelog</a>.</p>\n<h2>[3.0.0] - Unreleased</h2>\n<h3>Changed</h3>\n<ul>\n<li>BREAKING CHANGE: Require <code>status</code> to be an Integer. (<a href=\"https://github-redirect.dependabot.com/rack/rack/pull/1662\">#1662</a>, <a href=\"https://github.com/olleolleolle\">@olleolleolle</a>)</li>\n<li>Relax validations around <code>Rack::Request#host</code> and <code>Rack::Request#hostname</code>. (<a href=\"https://github-redirect.dependabot.com/rack/rack/issues/1606\">#1606</a>, <a href=\"https://github.com/pvande\">@pvande</a>)</li>\n<li>Removed antiquated handlers: FCGI, LSWS, SCGI, Thin. (<a href=\"https://github-redirect.dependabot.com/rack/rack/pull/1658\">#1658</a>, <a href=\"https://github.com/ioquatix\">@ioquatix</a>)</li>\n<li>Removed options from <code>Rack::Builder.parse_file</code> and <code>Rack::Builder.load_file</code>. (<a href=\"https://github-redirect.dependabot.com/rack/rack/pull/1663\">#1663</a>, <a href=\"https://github.com/ioquatix\">@ioquatix</a>)</li>\n</ul>\n<h3>Fixed</h3>\n<ul>\n<li>Fix using Rack::Session::Cookie with coder: Rack::Session::Cookie::Base64::{JSON,Zip}. (<a href=\"https://github-redirect.dependabot.com/rack/rack/issues/1666\">#1666</a>, <a href=\"https://github.com/jeremyevans\">@jeremyevans</a>)</li>\n<li>Avoid NoMethodError when accessing Rack::Session::Cookie without requiring delegate first. (<a href=\"https://github-redirect.dependabot.com/rack/rack/issues/1610\">#1610</a>, <a href=\"https://github.com/onigra\">@onigra</a>)</li>\n<li>Handle cookies with values that end in '=' (<a href=\"https://github-redirect.dependabot.com/rack/rack/pull/1645\">#1645</a>, <a href=\"https://github.com/lukaso\">@lukaso</a>)</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/rack/rack/commit/1741c580d71cfca8e541e96cc372305c8892ee74\"><code>1741c58</code></a> bump version</li>\n<li><a href=\"https://github.com/rack/rack/commit/5ccca4722668083732ea2d35c56565fcc25312f8\"><code>5ccca47</code></a> When parsing cookies, only decode the values</li>\n<li>See full diff in <a href=\"https://github.com/rack/rack/compare/v2.2.2...2.2.3\">compare view</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=rack&package-manager=bundler&previous-version=2.2.2&new-version=2.2.3)](https://help.github.com/articles/configuring-automated-security-fixes)\n\nDependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot merge` will merge this PR after your CI passes on it\n- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it\n- `@dependabot cancel merge` will cancel a previously requested merge and block automerging\n- `@dependabot reopen` will reopen this PR if it is closed\n- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually\n- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language\n- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language\n- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language\n- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language\n\nYou can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/w3c/json-ld-syntax/network/alerts).\n\n</details>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/355> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/355"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://schema.org/identifier> "355"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://schema.org/name> "Kill \"IRI\"?" .
+<https://api.github.com/users/dhh1128> <http://schema.org/accountId> "dhh1128" .
+<https://api.github.com/users/dhh1128> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/2208904?v=4" .
+<https://api.github.com/users/dhh1128> <http://schema.org/url> "https://github.com/dhh1128"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dhh1128> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://schema.org/creator> <https://api.github.com/users/dhh1128> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> <http://schema.org/name> "ErratumRaised" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> <http://schema.org/color> "ff0000" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> <http://schema.org/description> "Used by the errata management" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#OpenIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://schema.org/startDate> "2020-06-24T17:17:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://schema.org/description> "The heavy use of \"IRI\" as terminology in the spec, referencing RFC 3987, raises a number of thorny issues and actually makes JSON-LD out-of-sync with the latest developments at W3C. See https://www.w3.org/International/wiki/IRIStatus. (Also, the status of RFC 3987 has never moved past PROPOSED.)\r\n\r\nIf the spec continues to use the term, then there should probably be a section added to the spec to explain how JSON-LD proposes to solve the IRI problems such as inconsistent use of punycode and percent encoding. I suspect it would be simpler to use \"URL\" everywhere, per W3C recommendations, with a simple (foot)note explaining that the intent of \"URL\" is to encompass internationalization as originally envisioned by the IRI effort, but will track the work of the new URL working group for the particulars." .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/354> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/identifier> "354"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/name> "Remove atrisk notes." .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/startDate> "2020-06-08T00:42:49Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/endDate> "2020-06-12T21:40:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/354> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/354> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://schema.org/description> "For w3c/json-ld-wg#150.\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/pull/354.html\" title=\"Last updated on Jun 8, 2020, 12:43 AM UTC (37b1641)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/354/4c103ea...37b1641.html\" title=\"Last updated on Jun 8, 2020, 12:43 AM UTC (37b1641)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/353> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/353"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/identifier> "353"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/name> "Where is rdf:JSON specified? " .
+<https://api.github.com/users/dr-shorthair> <http://schema.org/accountId> "dr-shorthair" .
+<https://api.github.com/users/dr-shorthair> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/608303?v=4" .
+<https://api.github.com/users/dr-shorthair> <http://schema.org/url> "https://github.com/dr-shorthair"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dr-shorthair> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/creator> <https://api.github.com/users/dr-shorthair> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/startDate> "2020-06-04T02:36:43Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/endDate> "2020-06-04T10:13:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://schema.org/description> "I see reference to it here: https://w3c.github.io/json-ld-syntax/#the-rdf-json-datatype \r\nbut can't track down any mention in what I think are the relevant sections in the RDF or RDFS recs \r\nhttps://www.w3.org/TR/rdf11-concepts/#section-Datatypes \r\nhttps://www.w3.org/TR/rdf-schema/#ch_literal " .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/352> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/identifier> "352"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/name> "typo fixes" .
+<https://api.github.com/users/steltenpower> <http://schema.org/accountId> "steltenpower" .
+<https://api.github.com/users/steltenpower> <http://schema.org/image> "https://avatars2.githubusercontent.com/u/2406187?v=4" .
+<https://api.github.com/users/steltenpower> <http://schema.org/url> "https://github.com/steltenpower"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/steltenpower> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/creator> <https://api.github.com/users/steltenpower> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/Editorial> <http://schema.org/name> "Editorial" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/Editorial> <http://schema.org/color> "ff0000" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/Editorial> <http://schema.org/description> "Used by the errata management" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/Editorial> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> <http://schema.org/name> "ErratumRaised" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> <http://schema.org/color> "ff0000" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> <http://schema.org/description> "Used by the errata management" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/ErratumRaised> .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:editorial> <http://schema.org/name> "spec:editorial" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:editorial> <http://schema.org/color> "58820a" .
+<https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:editorial> <http://schema.org/description> "" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#label> <https://api.github.com/repos/w3c/json-ld-syntax/labels/spec:editorial> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/startDate> "2020-05-10T01:36:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/endDate> "2020-06-12T21:42:28Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#authorAssociation> "CONTRIBUTOR" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/352> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/352> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://schema.org/description> "\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/steltenpower/json-ld-syntax/pull/352.html\" title=\"Last updated on May 10, 2020, 1:36 AM UTC (6ef73ee)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/352/4c103ea...steltenpower:6ef73ee.html\" title=\"Last updated on May 10, 2020, 1:36 AM UTC (6ef73ee)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/351> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/351"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/identifier> "351"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/name> "Use one spelling of \"labeled\"." .
+<https://api.github.com/users/davidlehn> <http://schema.org/accountId> "davidlehn" .
+<https://api.github.com/users/davidlehn> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/109587?v=4" .
+<https://api.github.com/users/davidlehn> <http://schema.org/url> "https://github.com/davidlehn"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/davidlehn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/creator> <https://api.github.com/users/davidlehn> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/startDate> "2020-05-08T16:42:39Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/endDate> "2020-05-09T14:33:54Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/351> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/351"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/351> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/351> <http://schema.org/description> "" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/350> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/identifier> "350"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/name> "Added a note on superseding 1.0 into the SOTD" .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/startDate> "2020-05-06T13:53:02Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/endDate> "2020-05-06T19:37:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/350> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/350> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://schema.org/description> "At the instruction of PlH I have added a note into the SOTD about this. To make things quicker and avoid problems, I have changed the version of the document already on /TR.\n\n\n\n\n\n(Oops, I realized I made a spelling mistake in the name of the branch:-)\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/pull/350.html\" title=\"Last updated on May 6, 2020, 7:29 PM UTC (0a27e4c)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/350/6c4be3d...0a27e4c.html\" title=\"Last updated on May 6, 2020, 7:29 PM UTC (0a27e4c)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/349> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/349"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/identifier> "349"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/name> "Added the errata files" .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/startDate> "2020-05-02T09:00:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/endDate> "2020-05-02T14:27:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/349> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/349"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/349> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/349> <http://schema.org/description> "" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/325> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/325"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/identifier> "325"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/name> "changed definition of the rdf:JSON datatype" .
+<https://api.github.com/users/pchampin> <http://schema.org/accountId> "pchampin" .
+<https://api.github.com/users/pchampin> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/304612?v=4" .
+<https://api.github.com/users/pchampin> <http://schema.org/url> "https://github.com/pchampin"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/pchampin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/creator> <https://api.github.com/users/pchampin> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/startDate> "2020-01-24T15:19:28Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/endDate> "2020-01-24T18:08:39Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/325> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/325"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/325> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/325> <http://schema.org/description> "addressing #323\n\nNote that the description of the canonical form, which used to be non-normative (and using SHOULD) is now normative and uses MUST. It seemed inappropriate to define the value space non-normatively... :-/\n\nAs a consequence, the corresponding text in [API 8.6 Data Round Tripping](http://localhost:8000/json-ld-api/#data-round-tripping) is states:\n\n> The canonical lexical form of a JSON literal value is non-normative, \n\nand still uses SHOULD. I guess we should update it as well?\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/pull/325.html\" title=\"Last updated on Jan 24, 2020, 4:37 PM UTC (a25e7e5)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/325/597a8c4...a25e7e5.html\" title=\"Last updated on Jan 24, 2020, 4:37 PM UTC (a25e7e5)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax> <http://example.com/ns#issue> <https://api.github.com/repos/w3c/json-ld-syntax/issues/304> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/304"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/identifier> "304"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/name> "Address issue #303" .
+<https://api.github.com/users/pchampin> <http://schema.org/accountId> "pchampin" .
+<https://api.github.com/users/pchampin> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/304612?v=4" .
+<https://api.github.com/users/pchampin> <http://schema.org/url> "https://github.com/pchampin"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/pchampin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/creator> <https://api.github.com/users/pchampin> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#ClosedIssue> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/startDate> "2019-11-21T18:47:16Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/endDate> "2019-11-22T16:58:01Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/pulls/304> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/304"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://example.com/ns#pullRequest> <https://api.github.com/repos/w3c/json-ld-syntax/pulls/304> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/304> <http://schema.org/description> "* closed missing '****' in the expanded result of example 13\n* improved consistency of '****'-emphasis in example 13 & 14\n\n\n<!--\n    This comment and the below content is programatically generated.\n    You may add a comma-separated list of anchors you'd like a\n    direct link to below (e.g. #idl-serializers, #idl-sequence):\n\n    Don't remove this comment or modify anything below this line.\n    If you don't want a preview generated for this pull request,\n    just replace the whole of this comment's content by \"no preview\"\n    and remove what's below.\n-->\n***\n<a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/pull/304.html\" title=\"Last updated on Nov 21, 2019, 6:47 PM UTC (b17640f)\">Preview</a> | <a href=\"https://pr-preview.s3.amazonaws.com/w3c/json-ld-syntax/304/021edaa...b17640f.html\" title=\"Last updated on Nov 21, 2019, 6:47 PM UTC (b17640f)\">Diff</a>" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624749188> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350#issuecomment-624749188"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624749188> .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624749188> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624749188> <http://schema.org/startDate> "2020-05-06T16:22:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624749188> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624749188> <http://schema.org/description> "@iherman I presume we need the same changes for API and Framing." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624750652> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350#issuecomment-624750652"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624750652> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624750652> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624750652> <http://schema.org/startDate> "2020-05-06T16:25:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624750652> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624750652> <http://schema.org/description> "For framing it is not relevant, we did not have an earlier rec.\r\n\r\nYou are right about the API, I forgot. I will do it\r\n" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624756490> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350#issuecomment-624756490"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624756490> .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624756490> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624756490> <http://schema.org/startDate> "2020-05-06T16:36:09Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624756490> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624756490> <http://schema.org/description> "And, it sounds like you've updated the to-be-published document(s) in-place, so no need to update the publication snapshot?" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624757075> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350#issuecomment-624757075"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624757075> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624757075> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624757075> <http://schema.org/startDate> "2020-05-06T16:37:16Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624757075> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624757075> <http://schema.org/description> "> And, it sounds like you've updated the to-be-published document(s) in-place, so no need to update the publication snapshot?\r\n\r\nOnly if we want to be a purist:_) I think we can do without.\r\n\r\nDo not merge it yet, b.t.w., I do it in the API right now and I may change the sentence sligthly. I will add a ping here." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624759587> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/350#issuecomment-624759587"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/350> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624759587> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624759587> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624759587> <http://schema.org/startDate> "2020-05-06T16:41:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624759587> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/624759587> <http://schema.org/description> "Ok, done now. And the API is also done." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626390273> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352#issuecomment-626390273"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626390273> .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626390273> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626390273> <http://schema.org/startDate> "2020-05-10T21:11:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626390273> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626390273> <http://schema.org/description> "@iherman didn't these checks look to see if the submitter was in the organization, or allow it to be overridden? That seems to be missing from checks now. Certainly, there shouldn't be any issue with this PR, but it's curious that it's not doing that check anymore." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626630746> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352#issuecomment-626630746"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626630746> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626630746> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626630746> <http://schema.org/startDate> "2020-05-11T10:55:58Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626630746> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626630746> <http://schema.org/description> "@gkellogg you are right, I will ask..." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626761060> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352#issuecomment-626761060"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626761060> .
+<https://api.github.com/users/plehegar> <http://schema.org/accountId> "plehegar" .
+<https://api.github.com/users/plehegar> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/1490400?v=4" .
+<https://api.github.com/users/plehegar> <http://schema.org/url> "https://github.com/plehegar"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/plehegar> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626761060> <http://schema.org/creator> <https://api.github.com/users/plehegar> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626761060> <http://schema.org/startDate> "2020-05-11T15:03:59Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626761060> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626761060> <http://schema.org/description> "there is a glitch on GH side apparently. Our repo-manager got properly invoked and has https://labs.w3.org/repo-manager/pr/id/w3c/json-ld-syntax/352 . @dontcallmedom is following up.\r\n" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626789657> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352#issuecomment-626789657"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626789657> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626789657> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626789657> <http://schema.org/startDate> "2020-05-11T15:53:01Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626789657> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626789657> <http://schema.org/description> "@gkellogg all the changes are really spelling errors; they can be incorporated into the final Rec. Meaning that it may not be necessary to store them as Errata for the errata management." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626838194> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352#issuecomment-626838194"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626838194> .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626838194> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626838194> <http://schema.org/startDate> "2020-05-11T17:21:26Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626838194> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/626838194> <http://schema.org/description> "> @gkellogg all the changes are really spelling errors; they can be incorporated into the final Rec. Meaning that it may not be necessary to store them as Errata for the errata management.\r\n\r\nYes, but I thought it would be a good test of the errata system. As I understand it, this should now show up in https://w3c.github.com/json-ld-syntax/errata, although I don't see it there.\r\n\r\nOnce merged, we can remove the labels, as it would no longer need to be listed." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/627148283> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/352#issuecomment-627148283"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/352> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/627148283> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/627148283> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/627148283> <http://schema.org/startDate> "2020-05-12T06:49:04Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/627148283> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/627148283> <http://schema.org/description> "> Yes, but I thought it would be a good test of the errata system. As I understand it, this should now show up in https://w3c.github.com/json-ld-syntax/errata, although I don't see it there.\r\n\r\nNop. The errata list only includes \"accepted\" errata, meaning that the label is set to \"Errata\". \"ErratumRaised\" does not mean it is an accepted erratum." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638585612> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/353#issuecomment-638585612"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638585612> .
+<https://api.github.com/users/akuckartz> <http://schema.org/accountId> "akuckartz" .
+<https://api.github.com/users/akuckartz> <http://schema.org/image> "https://avatars2.githubusercontent.com/u/327651?v=4" .
+<https://api.github.com/users/akuckartz> <http://schema.org/url> "https://github.com/akuckartz"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/akuckartz> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638585612> <http://schema.org/creator> <https://api.github.com/users/akuckartz> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638585612> <http://schema.org/startDate> "2020-06-04T03:48:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638585612> <http://example.com/ns#authorAssociation> "NONE" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638585612> <http://schema.org/description> "This section is normative: https://w3c.github.io/json-ld-syntax/#the-rdf-json-datatype\r\n\r\nBut it seems to be somewhat irritating that rdf:JSON is specified in _that_ document." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638649720> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/353#issuecomment-638649720"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638649720> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638649720> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638649720> <http://schema.org/startDate> "2020-06-04T07:09:29Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638649720> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638649720> <http://schema.org/description> "@dr-shorthair, as @akuckartz referred to, this datatype is _defined_ by the JSON-LD specification. The RDF(S) namespaces are \"controlled\" by W3C, and not necessarily by a specific Working Group (which does not exist at the moment), so it is perfectly fine to add a new term to that namespace defined by another WG.\r\n\r\nIf and when an RDF WG is re-chartered by W3C, that _may_ add that datatype to the core RDF _specifications_ to make the reference documents complete. But that is sometimes into the future.\r\n" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638757023> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/353#issuecomment-638757023"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/353> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638757023> .
+<https://api.github.com/users/dr-shorthair> <http://schema.org/accountId> "dr-shorthair" .
+<https://api.github.com/users/dr-shorthair> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/608303?v=4" .
+<https://api.github.com/users/dr-shorthair> <http://schema.org/url> "https://github.com/dr-shorthair"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dr-shorthair> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638757023> <http://schema.org/creator> <https://api.github.com/users/dr-shorthair> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638757023> <http://schema.org/startDate> "2020-06-04T10:13:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638757023> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/638757023> <http://schema.org/description> "Ok - thanks. " .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640457247> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-640457247"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640457247> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640457247> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640457247> <http://schema.org/startDate> "2020-06-08T08:38:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640457247> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640457247> <http://schema.org/description> "+1 for me" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640620974> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-640620974"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640620974> .
+<https://api.github.com/users/pchampin> <http://schema.org/accountId> "pchampin" .
+<https://api.github.com/users/pchampin> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/304612?v=4" .
+<https://api.github.com/users/pchampin> <http://schema.org/url> "https://github.com/pchampin"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/pchampin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640620974> <http://schema.org/creator> <https://api.github.com/users/pchampin> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640620974> <http://schema.org/startDate> "2020-06-08T13:57:39Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640620974> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640620974> <http://schema.org/description> "+1" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640846802> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-640846802"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640846802> .
+<https://api.github.com/users/BigBlueHat> <http://schema.org/accountId> "BigBlueHat" .
+<https://api.github.com/users/BigBlueHat> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/43209?v=4" .
+<https://api.github.com/users/BigBlueHat> <http://schema.org/url> "https://github.com/BigBlueHat"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/BigBlueHat> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640846802> <http://schema.org/creator> <https://api.github.com/users/BigBlueHat> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640846802> <http://schema.org/startDate> "2020-06-08T19:42:07Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640846802> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640846802> <http://schema.org/description> "👍 " .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640851596> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-640851596"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640851596> .
+<https://api.github.com/users/hsolbrig> <http://schema.org/accountId> "hsolbrig" .
+<https://api.github.com/users/hsolbrig> <http://schema.org/image> "https://avatars2.githubusercontent.com/u/415926?v=4" .
+<https://api.github.com/users/hsolbrig> <http://schema.org/url> "https://github.com/hsolbrig"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/hsolbrig> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640851596> <http://schema.org/creator> <https://api.github.com/users/hsolbrig> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640851596> <http://schema.org/startDate> "2020-06-08T19:52:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640851596> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640851596> <http://schema.org/description> "I agree with these changes.  Strictly an clerical error." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640870534> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-640870534"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640870534> .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640870534> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640870534> <http://schema.org/startDate> "2020-06-08T20:33:01Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640870534> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640870534> <http://schema.org/description> "👍 " .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640936348> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-640936348"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640936348> .
+<https://api.github.com/users/lrosenthol> <http://schema.org/accountId> "lrosenthol" .
+<https://api.github.com/users/lrosenthol> <http://schema.org/image> "https://avatars2.githubusercontent.com/u/5074741?v=4" .
+<https://api.github.com/users/lrosenthol> <http://schema.org/url> "https://github.com/lrosenthol"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/lrosenthol> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640936348> <http://schema.org/creator> <https://api.github.com/users/lrosenthol> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640936348> <http://schema.org/startDate> "2020-06-08T23:17:33Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640936348> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/640936348> <http://schema.org/description> "+1" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641047276> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-641047276"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641047276> .
+<https://api.github.com/users/rubensworks> <http://schema.org/accountId> "rubensworks" .
+<https://api.github.com/users/rubensworks> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/440384?v=4" .
+<https://api.github.com/users/rubensworks> <http://schema.org/url> "https://github.com/rubensworks"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/rubensworks> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641047276> <http://schema.org/creator> <https://api.github.com/users/rubensworks> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641047276> <http://schema.org/startDate> "2020-06-09T05:56:54Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641047276> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641047276> <http://schema.org/description> "+1" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641370173> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-641370173"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641370173> .
+<https://api.github.com/users/ajs6f> <http://schema.org/accountId> "ajs6f" .
+<https://api.github.com/users/ajs6f> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/110994?v=4" .
+<https://api.github.com/users/ajs6f> <http://schema.org/url> "https://github.com/ajs6f"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/ajs6f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641370173> <http://schema.org/creator> <https://api.github.com/users/ajs6f> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641370173> <http://schema.org/startDate> "2020-06-09T15:23:51Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641370173> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641370173> <http://schema.org/description> ":+1: " .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641731148> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/354#issuecomment-641731148"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/354> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641731148> .
+<https://api.github.com/users/dlongley> <http://schema.org/accountId> "dlongley" .
+<https://api.github.com/users/dlongley> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/168137?v=4" .
+<https://api.github.com/users/dlongley> <http://schema.org/url> "https://github.com/dlongley"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dlongley> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641731148> <http://schema.org/creator> <https://api.github.com/users/dlongley> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641731148> <http://schema.org/startDate> "2020-06-10T05:29:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641731148> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/641731148> <http://schema.org/description> "+1 if my review approval didn't count towards the vote" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/648966209> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/355#issuecomment-648966209"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/648966209> .
+<https://api.github.com/users/pchampin> <http://schema.org/accountId> "pchampin" .
+<https://api.github.com/users/pchampin> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/304612?v=4" .
+<https://api.github.com/users/pchampin> <http://schema.org/url> "https://github.com/pchampin"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/pchampin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/648966209> <http://schema.org/creator> <https://api.github.com/users/pchampin> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/648966209> <http://schema.org/startDate> "2020-06-24T17:42:07Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/648966209> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/648966209> <http://schema.org/description> "The spec being a Proposed Recommendation, this is not the kind of change we can make in JSON-LD 1.1.\r\n\r\nNow, about considering that for a future version: since RDF refers to IRIs, I don't think it would be wise to change that in JSON-LD before RDF itself is updated. That being said, it might be an interesting suggestion to make in https://github.com/w3c/EasierRDF :-)\r\n\r\n" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649055342> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/355#issuecomment-649055342"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649055342> .
+<https://api.github.com/users/dhh1128> <http://schema.org/accountId> "dhh1128" .
+<https://api.github.com/users/dhh1128> <http://schema.org/image> "https://avatars1.githubusercontent.com/u/2208904?v=4" .
+<https://api.github.com/users/dhh1128> <http://schema.org/url> "https://github.com/dhh1128"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dhh1128> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649055342> <http://schema.org/creator> <https://api.github.com/users/dhh1128> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649055342> <http://schema.org/startDate> "2020-06-24T20:32:30Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649055342> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649055342> <http://schema.org/description> "Okay. In that case, perhaps it would be appropriate to tweak this paragraph:\r\n\r\n>This document almost exclusively uses the term IRI (Internationalized Resource Indicator) when discussing hyperlinks. Many Web developers are more familiar with the URL (Uniform Resource Locator) terminology. The document also uses, albeit rarely, the URI (Uniform Resource Indicator) terminology. While these terms are often used interchangeably among technical communities, they do have important distinctions from one another and the specification goes to great lengths to try and use the proper terminology at all times.\r\n\r\nPerhaps to something like this:\r\n\r\n>This document almost exclusively uses the term IRI (Internationalized Resource Indicator) when discussing hyperlinks. Many Web developers are more familiar with the URL (Uniform Resource Locator) terminology. The document also uses, albeit rarely, the URI (Uniform Resource Indicator) terminology. At the time this specification was developed, these terms had important technical distinctions from one another; they still do for some audiences. However, the IRI RFC has not matured beyond the PROPOSED STANDARD status since its introduction 15 years ago, and has not resolved some outstanding issues related to conflicting internationalization of domain names with punycode. Also, popular inertia has made it increasingly unusual to retain the distinction using the \"IRI\" term. Collective wisdom at the W3C now embraces the idea of \"URL\" as a generic cover term, as documented on [the wiki page for IRI status](https://www.w3.org/International/wiki/IRIStatus). For now, the specification maintains its original strategy of using \"IRI\" very carefully, which helps it align with its RDF foundation. Future versions may align the terminology to broader W3C usage without intending substantive changes to the meaning." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649133294> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/356#issuecomment-649133294"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/356> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649133294> .
+<https://api.github.com/users/gkellogg> <http://schema.org/accountId> "gkellogg" .
+<https://api.github.com/users/gkellogg> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/46296?v=4" .
+<https://api.github.com/users/gkellogg> <http://schema.org/url> "https://github.com/gkellogg"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/gkellogg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649133294> <http://schema.org/creator> <https://api.github.com/users/gkellogg> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649133294> <http://schema.org/startDate> "2020-06-24T23:51:16Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649133294> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649133294> <http://schema.org/description> "Marked as non substantive for IPR from ash-nazg." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207330> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/355#issuecomment-649207330"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207330> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207330> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207330> <http://schema.org/startDate> "2020-06-25T04:21:06Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207330> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207330> <http://schema.org/description> "Unfortunately, this is too late at this point. The Proposed Recommendation vote has just closed. Although we are in discussion with some of the official commentors to settle their issues before publishing the recommendation, we are not supposed to do any change of the level you propose.\r\n\r\nI have set the ErratumRaised flag on this issue. The future JSON-LD maintenance group may then consider this in a future release." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207993> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/355#issuecomment-649207993"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/355> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207993> .
+<https://api.github.com/users/iherman> <http://schema.org/accountId> "iherman" .
+<https://api.github.com/users/iherman> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/520723?v=4" .
+<https://api.github.com/users/iherman> <http://schema.org/url> "https://github.com/iherman"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/iherman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207993> <http://schema.org/creator> <https://api.github.com/users/iherman> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207993> <http://schema.org/startDate> "2020-06-25T04:23:49Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207993> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/649207993> <http://schema.org/description> "(My previous comment was an admin one, this is closer to the issue itself).\r\n\r\nJSON-LD is (also) a serialization of RDF. I know this issue has been raised for RDF and, in my view, that is the place where it should be solved. A deviation in terminology between JSON-LD and RDF would be detrimental.\r\n\r\n" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/652057186> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/pull/357#issuecomment-652057186"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/357> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/652057186> .
+<https://api.github.com/users/davidlehn> <http://schema.org/accountId> "davidlehn" .
+<https://api.github.com/users/davidlehn> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/109587?v=4" .
+<https://api.github.com/users/davidlehn> <http://schema.org/url> "https://github.com/davidlehn"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/davidlehn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/652057186> <http://schema.org/creator> <https://api.github.com/users/davidlehn> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/652057186> <http://schema.org/startDate> "2020-06-30T21:32:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/652057186> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/652057186> <http://schema.org/description> "I assume the common file update will go into all the repos once polished." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/655081037> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/358#issuecomment-655081037"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/358> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/655081037> .
+<https://api.github.com/users/davidlehn> <http://schema.org/accountId> "davidlehn" .
+<https://api.github.com/users/davidlehn> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/109587?v=4" .
+<https://api.github.com/users/davidlehn> <http://schema.org/url> "https://github.com/davidlehn"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/davidlehn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/655081037> <http://schema.org/creator> <https://api.github.com/users/davidlehn> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/655081037> <http://schema.org/startDate> "2020-07-07T19:37:19Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/655081037> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/655081037> <http://schema.org/description> "Fixed in https://github.com/w3c/json-ld-syntax/pull/359." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660533835> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/361#issuecomment-660533835"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660533835> .
+<https://api.github.com/users/dlongley> <http://schema.org/accountId> "dlongley" .
+<https://api.github.com/users/dlongley> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/168137?v=4" .
+<https://api.github.com/users/dlongley> <http://schema.org/url> "https://github.com/dlongley"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dlongley> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660533835> <http://schema.org/creator> <https://api.github.com/users/dlongley> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660533835> <http://schema.org/startDate> "2020-07-18T19:54:09Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660533835> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660533835> <http://schema.org/description> "So, allowing protection to be turned off like in the above suggestion would circumvent the protection feature -- so it's not a viable option. However, we could potentially allow for protection overrides for terms that were previously defined with no scoped context -- provided that their new definition is identical modulo the introduction of a scoped context. Another consideration is whether or not we would need the original definition to call out that it can be overwritten in this manner." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660614224> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/361#issuecomment-660614224"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660614224> .
+<https://api.github.com/users/Fak3> <http://schema.org/accountId> "Fak3" .
+<https://api.github.com/users/Fak3> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/991641?v=4" .
+<https://api.github.com/users/Fak3> <http://schema.org/url> "https://github.com/Fak3"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/Fak3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660614224> <http://schema.org/creator> <https://api.github.com/users/Fak3> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660614224> <http://schema.org/startDate> "2020-07-19T09:14:22Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660614224> <http://example.com/ns#authorAssociation> "CONTRIBUTOR" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660614224> <http://schema.org/description> "> So, allowing protection to be turned off like in the above suggestion would circumvent the protection feature -- so it's not a viable option.\r\n\r\nNo, i suggested that _@id_, _@type_, _@container_ for the protected terms still be protected from redefinition. Only the property-scoped @context can be modified." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660664584> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/361#issuecomment-660664584"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660664584> .
+<https://api.github.com/users/dlongley> <http://schema.org/accountId> "dlongley" .
+<https://api.github.com/users/dlongley> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/168137?v=4" .
+<https://api.github.com/users/dlongley> <http://schema.org/url> "https://github.com/dlongley"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dlongley> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660664584> <http://schema.org/creator> <https://api.github.com/users/dlongley> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660664584> <http://schema.org/startDate> "2020-07-19T15:36:13Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660664584> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660664584> <http://schema.org/description> "@Fak3,\r\n\r\n> No, i suggested that @id, @type, @container for the protected terms still be protected from redefinition. Only the property-scoped @context can be modified.\r\n\r\nAh, ok. I misunderstood how your proposal would work. I see now that you're suggesting that the original `issuer` definition could be modified to add a scoped context that included an `\"@protected\": false` flag -- as a signal that it could be overridden." .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660666612> <http://schema.org/url> "https://github.com/w3c/json-ld-syntax/issues/361#issuecomment-660666612"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/361> <http://example.com/ns#comment> <https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660666612> .
+<https://api.github.com/users/dlongley> <http://schema.org/accountId> "dlongley" .
+<https://api.github.com/users/dlongley> <http://schema.org/image> "https://avatars0.githubusercontent.com/u/168137?v=4" .
+<https://api.github.com/users/dlongley> <http://schema.org/url> "https://github.com/dlongley"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://api.github.com/users/dlongley> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ns#User> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660666612> <http://schema.org/creator> <https://api.github.com/users/dlongley> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660666612> <http://schema.org/startDate> "2020-07-19T15:50:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660666612> <http://example.com/ns#authorAssociation> "MEMBER" .
+<https://api.github.com/repos/w3c/json-ld-syntax/issues/comments/660666612> <http://schema.org/description> "Now that I better understand the proposal, I still think it would be problematic for at least a few reasons. I originally interpreted it the way I did because `@protected` would be processed within the scoped context (and generally when it is applied), not as part of the context where `issuer` itself is defined -- which is where the conflict is. Furthermore, `\"@protected\": false` already has meaning -- and is the default value for an `@context`; setting it doesn't mean that other term definitions within the context won't have `@protected` set to `true`. IOW, it is possible to have a context with a mix of `@protected` and unprotected terms.\r\n\r\nI think any signal that a scoped context can be overridden needs to be at the top level of the term definition that calls it out as a scoped context. That's where the protection applies. Just consider if the scoped context had been referenced by URL. It would be odd to have whether or not a particular scoped context can be replaced on a term be set by that context itself as opposed to the term definition that establishes it as a scoped context for that term." .
+
