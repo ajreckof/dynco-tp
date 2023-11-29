@@ -196,7 +196,7 @@ DELETE {
 
 16. A l’aide de votre tableur préféré, construisez un graphique sur lequel vous ferez figurer, à chaque étape, les différents tickets et les nombres de commentateurs pour chacune d’eux.
 
-
+![un graphique](fig.png)
 
 17. Eventuellement, vous pouvez vous fendre d’une conclusion que vous inspirent ces graphiques.
 
