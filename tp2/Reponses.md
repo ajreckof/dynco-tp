@@ -182,6 +182,8 @@ WHERE {
 } GROUPBY ?issue
 ```
 
+Nous avons décider de faire un `GROUPBY ?issue` pour ne pas supposer que toutes les issues ont un `s:name` différent.
+
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX ex: <http://example.com/ns#>
@@ -191,8 +193,6 @@ DELETE {
     ?x rdf:type ex:ClosedIssue
 }
 ```
-
-
 
 16. A l’aide de votre tableur préféré, construisez un graphique sur lequel vous ferez figurer, à chaque étape, les différents tickets et les nombres de commentateurs pour chacune d’eux.
 
