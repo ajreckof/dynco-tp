@@ -91,6 +91,25 @@ ex:Comment	"634"^^xsd:integer
 
 10. Indiquez la requête SPARQL envoyée pour insérer cette information dans le dataset.
 
+Nous avons tout d'abord essayer de réaliser cela en utilisant `SubClassOf` comme ci-dessous. 
+
+```
+PREFIX ex: <http://example.com/ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT DATA {
+    ex:Label owl:disjointWith ex:Issue.
+    ex:ClosedIssue owl:disjointWith ex:OpenIssue.
+    ex:VisitorIssue rdfs:subClassOf ex:Issue;
+                    owl:onProperty         ex:authorAssociation ;
+                    owl:hasValue "NONE" .
+    ex:VisitorOpenIssue owl:intersectionOf (ex:VisitorIssue ex:OpenIssue) .
+}
+```
+
+Cependant, le problème est qu'owl utilisait les deux derniers triplet sans prendre en compte le `SubClassOf`. Ainsi il donnait le type de `ex:VisitorIssue` a des instances qui n'était pas des `ex:Issue`. Pour forcer que ce soit bien des `ex:Issue` nous avons utilisé `owl:intersectionOf` avec un blank node comme ci-dessous.
+
 ```
 PREFIX ex: <http://example.com/ns#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -99,10 +118,11 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 INSERT DATA {
     ex:Label owl:disjointWith ex:Issue.
     ex:ClosedIssue owl:disjointWith ex:OpenIssue.
-    ex:VisitorIssue rdf:subClassOf ex:Issue;
-                    owl:onProperty 		ex:authorAssociation ;
-                    owl:hasValue "NONE" .
-    ex:VisitorOpenIssue owl:intersectionOf (ex:VisitorIssue ex:OpenIdsue) .
+    ex:VisitorIssue owl:intersectionOf (ex:Issue [
+                    owl:onProperty 	ex:authorAssociation ;
+                    owl:hasValue    "NONE"
+    ]).
+    ex:VisitorOpenIssue owl:intersectionOf (ex:VisitorIssue ex:OpenIssue) .
 }
 ```
 
