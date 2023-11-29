@@ -109,7 +109,13 @@ INSERT DATA {
 
 11. Indiquez la requête SPARQL envoyée pour insérer cette information dans le dataset.
 
-
+```
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX s: <http://schema.org/>
+    INSERT DATA {
+        s:url a owl:InverseFunctionalProperty.
+    }
+```
 
 12. Indiquez la requête SPARQL envoyée pour insérer cette information dans le dataset.
 
