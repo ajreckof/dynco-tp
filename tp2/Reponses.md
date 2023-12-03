@@ -200,4 +200,4 @@ DELETE {
 
 17. Eventuellement, vous pouvez vous fendre d’une conclusion que vous inspirent ces graphiques.
 
-
+On peut conclure que les sujets "Compact IRI expansion support for non-trivial prefix term definitions" et "@default in @context in JSON-LD core syntax" ne sont pas des sujets très actifs sur le repo GitHub.
